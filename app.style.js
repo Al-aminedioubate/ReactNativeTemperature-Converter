@@ -7,7 +7,8 @@ const s = StyleSheet.create({
   },
   workspace: {
     height: 450,
-    backgroundColor: "blue",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 });
 
