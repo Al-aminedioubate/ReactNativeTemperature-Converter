@@ -4,19 +4,33 @@ import hotImage from "./assets/hot.png";
 import { InputTemperature } from "./components/input/inputTemperature";
 import { TemperatureDisplay } from "./components/TemperatureDisplay/temperatureDisplay";
 import { useState } from "react";
-import { DEFAULT_TEMPERATURE, UNITS } from "./constante";
+import { DEFAULT_TEMPERATURE, UNITS, DEFAULT_UNIT } from "./constante";
+
+import {
+  getOpossiteUnit,
+  convertTemperatureTo,
+} from "./services/temperature-services";
 
 export default function App() {
   //liaison entre input et la valeur d'afficher
   const [inputValue, setInputValue] = useState(DEFAULT_TEMPERATURE);
-  const [currentUnit, setCurrentUnit] = useState(UNITS);
+  const [currentUnit, setCurrentUnit] = useState(DEFAULT_UNIT);
+  const oppositeUnit = getOpossiteUnit(currentUnit);
 
-  console.log(inputValue);
+  function getConvertedTemperature() {
+    const valueAsFloat = Number.parseFloat(inputValue);
+    return isNaN(valueAsFloat)
+      ? " "
+      : convertTemperatureTo(oppositeUnit, valueAsFloat).toFixed(2);
+  }
 
   return (
     <ImageBackground source={hotImage} style={s.container}>
       <View style={s.workspace}>
-        <TemperatureDisplay value={inputValue} unit={"°C"} />
+        <TemperatureDisplay
+          value={getConvertedTemperature()}
+          unit={getOpossiteUnit(currentUnit)}
+        />
         <View>
           <Text>Temperature</Text>
         </View>
