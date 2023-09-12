@@ -10,7 +10,7 @@ export default function App() {
         <View>
           <Text>Temperature</Text>
         </View>
-        <InputTemperature />
+        <InputTemperature defaultValue={"12"} />
         <View>
           <Text>Button</Text>
         </View>
