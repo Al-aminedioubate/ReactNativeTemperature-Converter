@@ -10,6 +10,7 @@ import {
   getOpossiteUnit,
   convertTemperatureTo,
 } from "./services/temperature-services";
+import { ButtonConvert } from "./components/ButtonConvert/buttonConvert";
 
 export default function App() {
   //liaison entre input et la valeur d'afficher
@@ -31,15 +32,12 @@ export default function App() {
           value={getConvertedTemperature()}
           unit={getOpossiteUnit(currentUnit)}
         />
-        <View>
-          <Text>Temperature</Text>
-        </View>
         <InputTemperature
           onChangeText={setInputValue}
           defaultValue={DEFAULT_TEMPERATURE}
         />
         <View>
-          <Text>Button</Text>
+          <ButtonConvert />
         </View>
       </View>
     </ImageBackground>
