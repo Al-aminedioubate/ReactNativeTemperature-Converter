@@ -4,7 +4,7 @@ import hotImage from "./assets/hot.png";
 import { InputTemperature } from "./components/input/inputTemperature";
 import { TemperatureDisplay } from "./components/TemperatureDisplay/temperatureDisplay";
 import { useState } from "react";
-import { DEFAULT_TEMPERATURE, UNITS, DEFAULT_UNIT } from "./constante";
+import { DEFAULT_TEMPERATURE, DEFAULT_UNIT } from "./constante";
 
 import {
   getOpossiteUnit,
@@ -13,7 +13,7 @@ import {
 import { ButtonConvert } from "./components/ButtonConvert/buttonConvert";
 
 export default function App() {
-  //liaison entre input et la valeur d'afficher
+  //liaison entre input et la valeur d'afficher apres le calcul
   const [inputValue, setInputValue] = useState(DEFAULT_TEMPERATURE);
   const [currentUnit, setCurrentUnit] = useState(DEFAULT_UNIT);
   const oppositeUnit = getOpossiteUnit(currentUnit);
@@ -30,14 +30,20 @@ export default function App() {
       <View style={s.workspace}>
         <TemperatureDisplay
           value={getConvertedTemperature()}
-          unit={getOpossiteUnit(currentUnit)}
+          unit={oppositeUnit}
         />
         <InputTemperature
           onChangeText={setInputValue}
           defaultValue={DEFAULT_TEMPERATURE}
+          unit={currentUnit}
         />
         <View>
-          <ButtonConvert />
+          <ButtonConvert
+            onPress={() => {
+              setCurrentUnit(oppositeUnit);
+            }}
+            unit={currentUnit}
+          />
         </View>
       </View>
     </ImageBackground>
