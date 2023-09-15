@@ -12,4 +12,12 @@ function convertTemperatureTo(unit, value) {
   }
 }
 
-export { getOpossiteUnit, convertTemperatureTo };
+function isIceTemperature(value, unit) {
+  if (unit === UNITS.celcius) {
+    return value <= 0;
+  } else {
+    return value <= 32;
+  }
+}
+
+export { getOpossiteUnit, convertTemperatureTo, isIceTemperature };
